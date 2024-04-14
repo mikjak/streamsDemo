@@ -382,4 +382,69 @@ public class AppTest {
 
         System.out.println(Arrays.toString(actors));
     }
+
+    @Test
+    public void flatMapToInt() {
+
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+        };
+
+        System.out.println("Matrix: ");
+        for(int[] a : matrix) {
+            System.out.println(Arrays.toString(a));
+        }
+
+        // Stream<int[]>
+        Stream<int[]> stream = Stream.of(matrix);
+
+        // IntStream
+        IntStream intStream = stream
+                .flatMapToInt(Arrays::stream);
+
+        intStream.forEach(AppTest::print);
+    }
+
+    private static void print(int x) {
+        System.out.print(x + " ");
+    }
+
+    @Test
+    public void streamsForeachVsForeachordered() {
+
+        String[] data = {
+          "A", "b", "C", "d", "_", "E", "f", "G"
+        };
+
+        System.out.println("Parallel context - ForEach");
+
+        for(int i = 0; i < 3; i++) {
+
+            Arrays.stream(data)
+                    .parallel()
+                    .forEach(x -> print(x));
+
+            System.out.println();
+        }
+
+        System.out.println("\n");
+
+        System.out.println("Parallel context - ForEachOrdered");
+        for (int i = 0; i < 3; i++) {
+            Arrays.stream(data)
+                    .parallel()
+                    .forEachOrdered(AppTest::print);
+
+            System.out.println();
+        }
+
+
+    }
+
+    private static void print(String s) {
+        System.out.print(s + " ");
+    }
+
+
 }
