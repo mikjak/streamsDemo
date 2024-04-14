@@ -121,6 +121,18 @@ public class AppTest {
         return x -> keys.add(keyProvider.apply(x));
     }
 
+    @Test
+    public void streamsCountDistinctElements() {
+        List<String> names =
+                Arrays.asList(
+                        "Kuba", "Emilka", "Jagoda", "Jaga",
+                        "Kuba", "Emilka"
+                );
 
+        long count = names.stream()
+                        .distinct().count();
+
+        assertThat(count).isEqualTo(4);
+    }
 
 }
