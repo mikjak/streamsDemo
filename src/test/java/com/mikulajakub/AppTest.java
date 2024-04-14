@@ -618,4 +618,26 @@ public class AppTest {
 
 
     }
+
+    @Test
+    public void streamsReversedSortedList() {
+        List<Citizen> citizens = Arrays.asList(
+                new Citizen("Ethan", 23),
+                new Citizen("Arturo", 52),
+                new Citizen("Juan", 18),
+                new Citizen("Alicia", 42),
+                new Citizen("Emilia", 17),
+                new Citizen("Kubek", 50)
+        );
+
+        System.out.println("People: ");
+        citizens.forEach(System.out::println);
+
+        System.out.println();
+        System.out.println("People sorted by name: ");
+
+        citizens.stream()
+                .sorted((first, second) -> second.getName().compareTo(first.getName()))
+                .forEach(System.out::println);
+    }
 }
