@@ -9,7 +9,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.byLessThan;
 
 public class AppTest {
 
@@ -133,6 +132,19 @@ public class AppTest {
                         .distinct().count();
 
         assertThat(count).isEqualTo(4);
+    }
+
+    @Test
+    public void streamsAllMatch() {
+        int[] numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        System.out.println("Numbers: " + Arrays.toString(numbers));
+
+        boolean allEven = Arrays.stream(numbers)
+                .allMatch(x -> x % 2 == 0);
+
+        System.out.println("All numbers are even? " + allEven);
+
     }
 
 }
