@@ -2,8 +2,6 @@ package com.mikulajakub;
 
 import com.mikulajakub.model.Citizen;
 import com.mikulajakub.model.Movie;
-import org.assertj.core.internal.Integers;
-import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -465,5 +463,20 @@ public class AppTest {
                 .limit(10);
 
         stream.forEach(x -> System.out.println(x));
+    }
+
+    @Test
+    public void StreamsMap() {
+        List<String> names = Arrays.asList(
+                "Anna", "Jan", "Katarzyna", "Piotr", "Małgorzata",
+                "Andrzej", "Agnieszka", "Tomasz", "Ewa", "Marcin",
+                "Joanna", "Krzysztof", "Magdalena", "Michał", "Beata",
+                "Robert", "Dorota", "Marek", "Monika", "Łukasz"
+        );
+
+        names.stream()
+                .map(x -> x.toLowerCase().contains("j") ? x + " <- j" : x)
+                .forEach(System.out::println);
+
     }
 }
