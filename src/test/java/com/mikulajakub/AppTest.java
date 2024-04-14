@@ -446,5 +446,17 @@ public class AppTest {
         System.out.print(s + " ");
     }
 
+    @Test
+    public void streamsGenerateInJava() {
+
+        List<String> uuids = Stream.generate(UUID::randomUUID)
+                .limit(5)
+                .map(x -> x.toString()
+                )
+                .collect(Collectors.toList());
+
+        System.out.println("UUIDs: ");
+        uuids.forEach(System.out::println);
+    }
 
 }
