@@ -1,6 +1,7 @@
 package com.mikulajakub;
 
 import com.mikulajakub.model.Citizen;
+import org.assertj.core.internal.Integers;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -8,6 +9,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -271,4 +273,29 @@ public class AppTest {
         System.out.println("FindFirst: " + name2);
     }
 
+    @Test
+    public void flatMapInteger2DArray() {
+
+        // given
+        Integer[][] twoDimensionalArray = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        // when
+        Integer[] result = Arrays.stream(twoDimensionalArray)
+                .flatMap(Arrays::stream)
+                .toArray(Integer[]::new);
+
+
+        Integer[] flatArray = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        System.out.println(Arrays.toString(result));
+        System.out.println(Arrays.toString(flatArray));
+
+
+        // then
+        assertThat(result).isEqualTo(flatArray);
+    }
 }
