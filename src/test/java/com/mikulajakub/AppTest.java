@@ -206,5 +206,43 @@ public class AppTest {
         assertThat(sum).isEqualTo(6);
     }
 
+    @Test
+    public void filterNamesWithSV1() {
+
+        List<String> polishNames = Arrays.asList(
+                "Anna", "Jan", "Katarzyna", "Piotr", "Małgorzata",
+                "Andrzej", "Agnieszka", "Tomasz", "Ewa", "Marcin",
+                "Joanna", "Krzysztof", "Magdalena", "Michał", "Beata",
+                "Robert", "Dorota", "Marek", "Monika", "Łukasz", "Sebastian",
+                "sebastian"
+        );
+
+        long count = polishNames.stream()
+                .map(String::toLowerCase)
+                .filter(x -> x.contains("s"))
+                .count();
+
+        assertThat(count).isEqualTo(6L);
+    }
+
+    @Test
+    public void filterNamesWithSV2() {
+
+        List<String> polishNames = Arrays.asList(
+                "Anna", "Jan", "Katarzyna", "Piotr", "Małgorzata",
+                "Andrzej", "Agnieszka", "Tomasz", "Ewa", "Marcin",
+                "Joanna", "Krzysztof", "Magdalena", "Michał", "Beata",
+                "Robert", "Dorota", "Marek", "Monika", "Łukasz", "Sebastian",
+                "sebastian"
+        );
+
+        Predicate<String> withS = x -> x.toLowerCase().contains("s");
+
+        long count = polishNames.stream()
+                .filter(withS)
+                .count();
+
+        assertThat(count).isEqualTo(6L);
+    }
 
 }
