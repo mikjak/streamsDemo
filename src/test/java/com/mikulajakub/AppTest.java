@@ -309,7 +309,7 @@ public class AppTest {
         };
 
         System.out.println("matrix: ");
-        for(int[] a : matrix) {
+        for (int[] a : matrix) {
             System.out.println(Arrays.toString(a));
         }
 
@@ -390,7 +390,7 @@ public class AppTest {
         };
 
         System.out.println("Matrix: ");
-        for(int[] a : matrix) {
+        for (int[] a : matrix) {
             System.out.println(Arrays.toString(a));
         }
 
@@ -412,12 +412,12 @@ public class AppTest {
     public void streamsForeachVsForeachordered() {
 
         String[] data = {
-          "A", "b", "C", "d", "_", "E", "f", "G"
+                "A", "b", "C", "d", "_", "E", "f", "G"
         };
 
         System.out.println("Parallel context - ForEach");
 
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
 
             Arrays.stream(data)
                     .parallel()
@@ -459,7 +459,7 @@ public class AppTest {
 
     @Test
     public void StreamsIterate() {
-        Stream<Integer> stream = Stream.iterate(10, x -> x -2)
+        Stream<Integer> stream = Stream.iterate(10, x -> x - 2)
                 .limit(10);
 
         stream.forEach(x -> System.out.println(x));
@@ -478,5 +478,69 @@ public class AppTest {
                 .map(x -> x.toLowerCase().contains("j") ? x + " <- j" : x)
                 .forEach(System.out::println);
 
+    }
+
+    @Test
+    public void streamsMax() {
+        List<String> list = Arrays.asList("A", "B", "DC", "D");
+
+        System.out.println(list);
+
+        String max = list.stream()
+                .max((x, y) -> x.compareTo(y))
+                .get();
+
+        System.out.println(max);
+
+    }
+
+    @Test
+    public void streamsPeek() {
+        List<String> characters = Arrays.asList(
+                "Eddard \"Ned\" Stark",
+                "Robert Baratheon",
+                "Jaime Lannister",
+                "Catelyn Stark",
+                "Cersei Lannister",
+                "Daenerys Targaryen",
+                "Jorah Mormont",
+                "Jon Snow",
+                "Robb Stark",
+                "Sansa Stark",
+                "Arya Stark",
+                "Tyrion Lannister",
+                "Khal Drogo",
+                "Petyr \"Littlefinger\" Baelish",
+                "Davos Seaworth",
+                "Stannis Baratheon",
+                "Melisandre",
+                "Bronn",
+                "Varys",
+                "Shae",
+                "Margaery Tyrell",
+                "Tywin Lannister",
+                "Talisa Maegyr",
+                "Ygritte",
+                "Gendry",
+                "Tormund Giantsbane",
+                "Brienne of Tarth",
+                "Ramsay Bolton",
+                "Gilly",
+                "Daario Naharis",
+                "Missandei",
+                "Tommen Baratheon",
+                "Ellaria Sand",
+                "Jaqen H'ghar",
+                "Roose Bolton",
+                "The High Sparrow",
+                "Grey Worm"
+        );
+
+        characters.stream()
+                .filter(character -> character.contains("Lannister"))
+                .peek(x -> System.out.println(x + " - after filter"))
+                .map(String::toUpperCase)
+                .peek(x -> System.out.println(x + " - after map"))
+                .count();
     }
 }
