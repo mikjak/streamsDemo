@@ -459,4 +459,11 @@ public class AppTest {
         uuids.forEach(System.out::println);
     }
 
+    @Test
+    public void StreamsIterate() {
+        Stream<Integer> stream = Stream.iterate(10, x -> x -2)
+                .limit(10);
+
+        stream.forEach(x -> System.out.println(x));
+    }
 }
