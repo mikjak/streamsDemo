@@ -592,6 +592,29 @@ public class AppTest {
                         Map.Entry::getValue
                 ))
                 .forEach(x -> System.out.printf("%s - %s\n", x.getKey(), x.getValue()));
+    }
+
+    @Test
+    public void streamsSortedList() {
+        List<Citizen> citizens = Arrays.asList(
+                new Citizen("Ethan", 23),
+                new Citizen("Arturo", 52),
+                new Citizen("Juan", 18),
+                new Citizen("Alicia", 42),
+                new Citizen("Emilia", 17),
+                new Citizen("Kubek", 50)
+        );
+
+        System.out.println("People: ");
+        citizens.forEach(System.out::println);
+
+        System.out.println();
+        System.out.println("People sorted by name: ");
+
+        citizens.stream()
+                .sorted(Comparator.comparing(Citizen::getName))
+//                .sorted((x, y) -> x.getName().compareTo(y.getName()))
+                .forEach(System.out::println);
 
 
     }
