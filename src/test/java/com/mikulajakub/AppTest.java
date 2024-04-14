@@ -245,4 +245,30 @@ public class AppTest {
         assertThat(count).isEqualTo(6L);
     }
 
+    @Test
+    public void findAnyVsFindFirst() {
+
+        List<String> names = Arrays.asList(
+                "Anna", "Jan", "Katarzyna", "Piotr", "Małgorzata",
+                "Andrzej", "Agnieszka", "Tomasz", "Ewa", "Marcin",
+                "Joanna", "Krzysztof", "Magdalena", "Michał", "Beata",
+                "Robert", "Dorota", "Marek", "Monika", "Łukasz"
+        );
+
+        String name1 = names.stream()
+                .parallel()
+                .sorted()
+                .findAny()
+                .get();
+
+        String name2 = names.stream()
+                .parallel()
+                .sorted()
+                .findFirst()
+                .get();
+
+        System.out.println("FindAny: " + name1);
+        System.out.println("FindFirst: " + name2);
+    }
+
 }
