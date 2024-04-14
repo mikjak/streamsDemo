@@ -1,7 +1,9 @@
 package com.mikulajakub;
 
 import com.mikulajakub.model.Citizen;
+import com.mikulajakub.model.Movie;
 import org.assertj.core.internal.Integers;
+import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -339,5 +341,45 @@ public class AppTest {
                 .toArray(x -> new String[x]);
 
         System.out.println(Arrays.toString(singleArray));
+    }
+
+    @Test
+    public void testWithMovieAndActors() {
+        Movie[] movies = {
+                new Movie("Killer"),
+                new Movie("Psy"),
+                new Movie("Akademia Pana Kleksa")
+        };
+
+        movies[0].addActor("Cezary Pazura");
+        movies[0].addActor("Rewiński");
+
+        movies[1].addActor("Bogusław Linda");
+        movies[1].addActor("Cezary Pazura");
+
+        movies[2].addActor("Piotr Fronczewski");
+        movies[2].addActor("Meluzyna");
+
+//        for (Movie movie : movies) {
+//            System.out.println(movie);
+//        }
+
+        Arrays.stream(movies).forEach(
+                x -> {
+                    System.out.println("Title: " + x.getTitle());
+                    System.out.print("Actors: ");
+                    System.out.print(String.join("; ", x.getActors()));
+                    System.out.println();
+                    System.out.println();
+                }
+        );
+
+        String[] actors = Arrays.stream(movies)
+                .map(x -> x.getActors())
+                .flatMap(x -> x.stream())
+                .distinct()
+                .toArray(x -> new String[x]);
+
+        System.out.println(Arrays.toString(actors));
     }
 }
