@@ -2,6 +2,7 @@ package com.mikulajakub;
 
 import com.mikulajakub.model.Citizen;
 import com.mikulajakub.model.Movie;
+import org.assertj.core.data.MapEntry;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -563,6 +564,35 @@ public class AppTest {
 
         System.out.println("product: " + product);
         System.out.println("sum: " + sum);
+
+    }
+
+    @Test
+    public void streamsSortedHashMap() {
+
+        Map<String, Integer> dict = new HashMap<>();
+        dict.put("John", 20);
+        dict.put("Jane", 25);
+        dict.put("Jack", 30);
+        dict.put("George", 40);
+        dict.put("Mark", 50);
+        dict.put("David", 60);
+        dict.put("Beck", 30);
+
+        System.out.println("HashMap: ");
+        dict.forEach(
+                (x, y) -> System.out.printf("%s - %s\n", x, y)
+        );
+
+        System.out.println();
+        System.out.println("Sorted values:");
+
+        dict.entrySet().stream()
+                .sorted(Comparator.comparing(
+                        Map.Entry::getValue
+                ))
+                .forEach(x -> System.out.printf("%s - %s\n", x.getKey(), x.getValue()));
+
 
     }
 }
