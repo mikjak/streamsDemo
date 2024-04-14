@@ -145,6 +145,7 @@ public class AppTest {
 
         System.out.println("All numbers are even? " + allEven);
 
+        assertThat(allEven).isFalse();
     }
 
 }
