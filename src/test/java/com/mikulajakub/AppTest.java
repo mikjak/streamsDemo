@@ -543,4 +543,26 @@ public class AppTest {
                 .peek(x -> System.out.println(x + " - after map"))
                 .count();
     }
+
+    @Test
+    public void streamsReduce() {
+
+        int[] numbers = {4, 3, 6, 1};
+
+        for (int i : numbers) {
+            System.out.print(i + " ");
+        }
+
+        System.out.println();
+
+        int product = Arrays.stream(numbers)
+                .reduce(1, (a, b) -> a * b);
+
+        int sum = Arrays.stream(numbers)
+                .reduce(0, Integer::sum);
+
+        System.out.println("product: " + product);
+        System.out.println("sum: " + sum);
+
+    }
 }
