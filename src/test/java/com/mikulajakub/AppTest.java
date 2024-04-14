@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -297,5 +298,46 @@ public class AppTest {
 
         // then
         assertThat(result).isEqualTo(flatArray);
+    }
+
+    @Test
+    public void flatMapIntArray() {
+
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+        };
+
+        System.out.println("matrix: ");
+        for(int[] a : matrix) {
+            System.out.println(Arrays.toString(a));
+        }
+
+        Arrays.stream(matrix)
+                .flatMap(x -> Arrays.stream(x).boxed())
+                .forEach(System.out::print);
+
+    }
+
+    @Test
+    public void matrix2DintoArray() {
+
+        String[][] names = {
+                {"Anna", "Jan", "Katarzyna", "Piotr", "Małgorzata"},
+                {"Andrzej", "Agnieszka", "Tomasz", "Ewa", "Marcin"}
+        };
+
+        // get stream
+        Stream<String[]> stream = Arrays.stream(names);
+
+        // flat stream
+        Stream<String> stringStream = stream
+                .flatMap(Arrays::stream);
+
+        // to array
+        String[] singleArray = stringStream
+                .toArray(x -> new String[x]);
+
+        System.out.println(Arrays.toString(singleArray));
     }
 }
