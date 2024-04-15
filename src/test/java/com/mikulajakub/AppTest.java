@@ -640,4 +640,79 @@ public class AppTest {
                 .sorted((first, second) -> second.getName().compareTo(first.getName()))
                 .forEach(System.out::println);
     }
+
+    @Test
+    public void streamsMapToInt() {
+        List<Citizen> citizens = Arrays.asList(
+                new Citizen("Ethan", 23),
+                new Citizen("Arturo", 52),
+                new Citizen("Juan", 18),
+                new Citizen("Alicia", 42),
+                new Citizen("Emilia", 17),
+                new Citizen("Kubek", 50)
+        );
+
+        System.out.println("People: ");
+        citizens.forEach(System.out::println);
+
+        int sumAges = citizens.stream()
+                .mapToInt(p -> p.getAge())
+                .sum();
+
+        int maxAge = citizens.stream()
+                .mapToInt(Citizen::getAge)
+                .max().getAsInt();
+
+        System.out.println("Sum ages: " + sumAges);
+        System.out.println("Max ages: " + maxAge);
+    }
+
+    @Test
+    public void streamsFindFirstOrElse() {
+        List<String> names = List.of(
+                "Alice", "Bob", "Charlie", "David", "Eva",
+                "Frank", "Grace", "Hannah", "Isaac", "Julia",
+                "Kevin", "Lena", "Michael", "Nina", "Oscar",
+                "Paul", "Quinn", "Rachel", "Samuel", "Tina",
+                "Ursula", "Victor", "Wendy", "Xander", "Yara",
+                "Zane", "Abby", "Ben", "Chloe", "Daniel"
+        );
+
+        String name = names.stream()
+                .filter(n -> n.startsWith("C"))
+                .findFirst().orElse("Not found !!!");
+
+        System.out.println(name);
+    }
+
+    @Test
+    public void streamsFindFirstIfPresent() {
+        List<String> names = List.of(
+                "Alice", "Bob", "Charlie", "David", "Eva",
+                "Frank", "Grace", "Hannah", "Isaac", "Julia",
+                "Kevin", "Lena", "Michael", "Nina", "Oscar",
+                "Paul", "Quinn", "Rachel", "Samuel", "Tina",
+                "Ursula", "Victor", "Wendy", "Xander", "Yara",
+                "Zane", "Abby", "Ben", "Chloe", "Daniel"
+        );
+
+        names.stream()
+                .filter(n -> n.startsWith("C"))
+                .findFirst().ifPresent(x -> System.out.println("Hello " + x));
+
+    }
+
+    @Test
+    public void streamsCollectorsJoinStringV1() {
+
+        List<String> names = List.of(
+                "James", "John", "Robert"
+        );
+
+        String namesJoined = names.stream()
+                .collect(Collectors.joining(" - ")
+                );
+
+        System.out.println(namesJoined);
+    }
 }
