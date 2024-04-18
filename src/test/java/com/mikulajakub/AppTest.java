@@ -715,4 +715,47 @@ public class AppTest {
 
         System.out.println(namesJoined);
     }
+
+    @Test
+    public void test001() {
+        Stream<String> names = Stream.of("John", "Marry", "George", "Paul", "Alice", "Ann");
+
+        names
+                .filter(n -> n.contains("a"))
+                .map(String::toUpperCase)
+                .sorted()
+                .forEach(x -> System.out.printf("%s, ", x));
+
+    }
+
+    @Test
+    public void test002() {
+        Stream<String> names = Stream.of("John", "Marry", "George", "Paul", "Alice", "Ann");
+
+        names
+                .filter(
+                        e -> {
+                            System.out.println("filter: " + e);
+                            return true;
+                        })
+                .forEach(e -> System.out.println("forEach: " + e));
+
+    }
+
+    @Test
+    public void test003() {
+        final List<List<Integer>> slicedIntegers = Arrays.asList(
+                Arrays.asList(2, 4, 6),
+                Arrays.asList(8, 10, 12),
+                Arrays.asList(14, 16)
+        );
+
+        final List<Integer> simpleIntegerList = slicedIntegers
+                .stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        System.out.println("slicedIntegers: " + slicedIntegers);
+        System.out.println("simpleIntegerList: " + simpleIntegerList);
+    }
 }
